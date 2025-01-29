@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const fetch = require("node-fetch");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -14,6 +13,7 @@ app.get("/proxy", async (req, res) => {
     }
 
     try {
+        const fetch = (await import("node-fetch")).default; // Use dynamic import
         const response = await fetch(url, { headers: { "User-Agent": "Mozilla/5.0" } });
         const contentType = response.headers.get("content-type");
 
